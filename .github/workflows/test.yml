@@ -631,3 +631,43 @@ jobs:
           else
             echo "Changelog config not applied" && exit 1
           fi
+
+  test-commit-path:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: "./"
+
+      - run: npm ci --prod
+
+      - run: touch ./fake-file.log
+      - run: "git config --global user.email 'changelog@github.com'"
+      - run: "git config --global user.name 'Awesome Github action'"
+      - run: "git add . && git commit -m 'feat: Added fake file so MINOR version will be bumped'"
+      - run: mkdir ./another-path
+      - run: cp ./test-file.json ./another-path/test-file.json
+      - run: touch ./another-path/another-fake-file.log
+      - run: "git add . && git commit -m 'fix: Added another fake file so PATCH version will be bumped'"
+
+      - name: Generate changelog
+        id: changelog
+        uses: ./
+        env:
+          ENV: 'dont-use-git'
+          EXPECTED_TAG: 'v1.4.6'
+        with:
+          github-token: ${{ secrets.github_token }}
+          version-file: './another-path/test-file.json'
+          commit-path: 'another-path'
+
+      - name: Show file
+        run: |
+          echo "$(<./another-path/test-file.json)"
+
+      - name: Test output
+        run: node ./test-output.js
+        env:
+          FILES: './another-path/test-file.json'
+          EXPECTED_VERSION: '1.4.6'
