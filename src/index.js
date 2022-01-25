@@ -42,6 +42,7 @@ async function run() {
     const skipEmptyRelease = core.getInput('skip-on-empty').toLowerCase() === 'true'
     const conventionalConfigFile = core.getInput('config-file-path')
     const preChangelogGenerationFile = core.getInput('pre-changelog-generation')
+    const path = core.getInput('commit-path')
 
     core.info(`Using "${preset}" preset`)
     core.info(`Using "${gitCommitMessage}" as commit message`)
@@ -53,6 +54,7 @@ async function run() {
     core.info(`Using "${tagPrefix}" as tag prefix`)
     core.info(`Using "${outputFile}" as output file`)
     core.info(`Using "${conventionalConfigFile}" as config file`)
+    core.info(`Using "${path}" as commit path`)
 
     if (preCommitFile) {
       core.info(`Using "${preCommitFile}" as pre-commit script`)
@@ -72,7 +74,7 @@ async function run() {
 
     const config = conventionalConfigFile && requireScript(conventionalConfigFile)
 
-    conventionalRecommendedBump({ preset, tagPrefix, config }, async (error, recommendation) => {
+    conventionalRecommendedBump({ preset, tagPrefix, config, path }, async (error, recommendation) => {
       if (error) {
         core.setFailed(error.message)
         return
@@ -134,7 +136,7 @@ async function run() {
       }
 
       // Generate the string changelog
-      const stringChangelog = await changelog.generateStringChangelog(tagPrefix, preset, newVersion, 1, config)
+      const stringChangelog = await changelog.generateStringChangelog(tagPrefix, preset, newVersion, 1, path, config)
       core.info('Changelog generated')
       core.info(stringChangelog)
 
@@ -152,7 +154,7 @@ async function run() {
       // If output file === 'false' we don't write it to file
       if (outputFile !== 'false') {
         // Generate the changelog
-        await changelog.generateFileChangelog(tagPrefix, preset, newVersion, outputFile, releaseCount, config)
+        await changelog.generateFileChangelog(tagPrefix, preset, newVersion, outputFile, releaseCount, path, config)
       }
 
       if (!skipCommit) {

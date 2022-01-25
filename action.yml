@@ -107,6 +107,9 @@ inputs:
     description: 'Path to the pre-changelog-generation script file'
     required: false
 
+  commit-path:
+    description: 'Generate a changelog scoped to a specific directory'
+    required: false
 
 outputs:
   changelog:

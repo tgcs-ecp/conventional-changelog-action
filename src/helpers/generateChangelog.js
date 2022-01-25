@@ -10,7 +10,7 @@ const conventionalChangelog = require('conventional-changelog')
  * @param releaseCount
  * @returns {*}
  */
-const getChangelogStream = (tagPrefix, preset, version, releaseCount, config) => conventionalChangelog({
+const getChangelogStream = (tagPrefix, preset, version, releaseCount, path, config) => conventionalChangelog({
     preset,
     releaseCount: parseInt(releaseCount, 10),
     tagPrefix,
@@ -20,7 +20,9 @@ const getChangelogStream = (tagPrefix, preset, version, releaseCount, config) =>
     version,
     currentTag: `${tagPrefix}${version}`,
   },
-  {},
+  {
+    path
+  },
   config && config.parserOpts,
   config && config.writerOpts
 )
@@ -36,8 +38,8 @@ module.exports = getChangelogStream
  * @param releaseCount
  * @returns {Promise<string>}
  */
-module.exports.generateStringChangelog = (tagPrefix, preset, version, releaseCount, config) => new Promise((resolve, reject) => {
-  const changelogStream = getChangelogStream(tagPrefix, preset, version, releaseCount, config)
+module.exports.generateStringChangelog = (tagPrefix, preset, version, releaseCount, path, config) => new Promise((resolve, reject) => {
+  const changelogStream = getChangelogStream(tagPrefix, preset, version, releaseCount, path, config)
 
   let changelog = ''
 
@@ -58,8 +60,8 @@ module.exports.generateStringChangelog = (tagPrefix, preset, version, releaseCou
  * @param releaseCount
  * @returns {Promise<>}
  */
-module.exports.generateFileChangelog = (tagPrefix, preset, version, fileName, releaseCount, config) => new Promise((resolve) => {
-  const changelogStream = getChangelogStream(tagPrefix, preset, version, releaseCount, config)
+module.exports.generateFileChangelog = (tagPrefix, preset, version, fileName, releaseCount, path, config) => new Promise((resolve) => {
+  const changelogStream = getChangelogStream(tagPrefix, preset, version, releaseCount, path, config)
 
   changelogStream
     .pipe(fs.createWriteStream(fileName))
