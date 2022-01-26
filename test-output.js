@@ -3,6 +3,7 @@ const assert = require('assert')
 const objectPath = require('object-path')
 const yaml = require('yaml')
 const toml = require('@iarna/toml')
+const parseString = require('xml2js').parseString
 
 const actionConfig = yaml.parse(fs.readFileSync('./action.yml', 'utf8'))
 
@@ -39,6 +40,12 @@ FILES.split(',').map((file, index) => {
 
     case 'toml':
       parsedContent = toml.parse(fileContent)
+      break
+
+    case 'xml':
+      parseString(fileContent, { explicitArray: false }, function (err, result) {
+        parsedContent = result
+      });
       break
 
     default:
