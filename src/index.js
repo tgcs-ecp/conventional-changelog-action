@@ -43,6 +43,7 @@ async function run() {
     const conventionalConfigFile = core.getInput('config-file-path')
     const preChangelogGenerationFile = core.getInput('pre-changelog-generation')
     const path = core.getInput('commit-path')
+    const skipTag = core.getInput('skip-tag').toLowerCase() === 'true'
 
     core.info(`Using "${preset}" preset`)
     core.info(`Using "${gitCommitMessage}" as commit message`)
@@ -89,10 +90,8 @@ async function run() {
 
       let newVersion
 
-      // If skipVersionFile or skipCommit is true we use GIT to determine the new version because
-      // skipVersionFile can mean there is no version file and skipCommit can mean that the user
-      // is only interested in tags
-      if (skipVersionFile || skipCommit) {
+      // If skipVersionFile is true we use GIT to determine the new version
+      if (skipVersionFile) {
         core.info('Using GIT to determine the new version')
         const versioning = await handleVersioningByExtension(
           'git',
@@ -176,7 +175,9 @@ async function run() {
       }
 
       // Create the new tag
-      await git.createTag(gitTag)
+      if(!skipTag) {
+        await git.createTag(gitTag)
+      }
 
       if (gitPush) {
         try {

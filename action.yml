@@ -111,6 +111,11 @@ inputs:
     description: 'Generate a changelog scoped to a specific directory'
     required: false
 
+  skip-tag:
+    description: 'Skip creating the git tag'
+    default: 'false'
+    required: false
+
 outputs:
   changelog:
     description: 'The generated changelog for the new version'
