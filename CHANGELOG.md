@@ -1,3 +1,12 @@
+# [3.13.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.12.0...v3.13.0) (2022-01-26)
+
+
+### Features
+
+* add skip-tag option (breaking, but bump only minor...) ([#3](https://github.com/TriPSs/conventional-changelog-action/issues/3)) ([6bdc3cb](https://github.com/TriPSs/conventional-changelog-action/commit/6bdc3cb00e5b0da57bfeaee83acedf66c678295e))
+
+
+
 # [3.12.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.11.0...v3.12.0) (2022-01-26)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Try again with different node_modules ([9378b30](https://github.com/TriPSs/conventional-changelog-action/commit/9378b3051abbd2f793956f852cdc7bac0fea7d9c))
-
-
-
-## [3.9.8](https://github.com/TriPSs/conventional-changelog-action/compare/v3.9.7...v3.9.8) (2021-10-05)
-
-
-### Bug Fixes
-
-* Downgraded the conventional packages ([052fce1](https://github.com/TriPSs/conventional-changelog-action/commit/052fce1f3fc33b9194f6e7ea5793691128ee732b))
 
 
 
