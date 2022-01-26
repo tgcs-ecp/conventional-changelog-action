@@ -1,3 +1,12 @@
+# [3.12.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.11.0...v3.12.0) (2022-01-26)
+
+
+### Features
+
+* add xml update file support ([#2](https://github.com/TriPSs/conventional-changelog-action/issues/2)) ([5fec667](https://github.com/TriPSs/conventional-changelog-action/commit/5fec667b0cf7d0d67f722bcc6a0add95e79c78ef))
+
+
+
 # [3.11.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.10.0...v3.11.0) (2022-01-25)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Downgraded the conventional packages ([052fce1](https://github.com/TriPSs/conventional-changelog-action/commit/052fce1f3fc33b9194f6e7ea5793691128ee732b))
-
-
-
-## [3.9.7](https://github.com/TriPSs/conventional-changelog-action/compare/v3.9.6...v3.9.7) (2021-10-05)
-
-
-### Bug Fixes
-
-* Release with all deps ([2b36c79](https://github.com/TriPSs/conventional-changelog-action/commit/2b36c79d01330e9272a6f28e9f019a7c6203425e))
 
 
 
