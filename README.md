@@ -25,6 +25,7 @@ This action will bump version, tag commit and generate a changelog with conventi
 - **Optional** `config-file-path`: Path to the conventional changelog config file. If set, the preset setting will be ignored
 - **Optional** `pre-changelog-generation`: Path to the pre-changelog-generation script file. No hook by default.
 - **Optional** `commit-path`: Generate a changelog scoped to a specific directory.
+- **Optional** `skip-tag`: Skip creating a tag for this changelog. Default `false`.
 
 ### Pre-Commit hook
 
