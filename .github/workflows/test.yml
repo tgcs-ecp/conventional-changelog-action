@@ -124,6 +124,7 @@ jobs:
       - run: git tag | xargs git tag -d
       - name: Create fake tag
         run: "git tag -a 'v0.55.8' -m 'v0.55.8'"
+      - run: touch ./fake-file.log
       - run: "git add . && git commit -m 'fix: Added fake file so version will be bumped'"
 
       - name: Generate changelog
@@ -136,6 +137,7 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
+          skip-version-file: 'true'
           
   test-git-no-pull:
     runs-on: ubuntu-latest
@@ -153,6 +155,7 @@ jobs:
       - run: git tag | xargs git tag -d
       - name: Create fake tag
         run: "git tag -a 'v0.55.8' -m 'v0.55.8'"
+      - run: touch ./fake-file.log
       - run: "git add . && git commit -m 'fix: Added fake file so version will be bumped'"
 
       - name: Generate changelog
@@ -167,6 +170,7 @@ jobs:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
           skip-git-pull: 'true'
+          skip-version-file: 'true'
 
   test-git-fallback:
     runs-on: ubuntu-latest
@@ -181,6 +185,7 @@ jobs:
       - run: touch ./fake-file.log
       - run: "git config --global user.email 'changelog@github.com'"
       - run: "git config --global user.name 'Awesome Github action'"
+      - run: touch ./fake-file.log
       - run: "git add . && git commit -m 'feat: Added fake file so version will be bumped'"
 
       - run: git tag | xargs git tag -d
@@ -195,6 +200,7 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
+          skip-version-file: 'true'
 
   test-git-no-push:
     runs-on: ubuntu-latest
@@ -212,6 +218,7 @@ jobs:
       - run: git tag | xargs git tag -d
       - name: Create fake tag
         run: "git tag -a 'v0.55.8' -m 'v0.55.8'"
+      - run: touch ./fake-file.log
       - run: "git add . && git commit -m 'fix: Added fake file so version will be bumped'"
 
       - name: Generate changelog
@@ -226,6 +233,7 @@ jobs:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
           git-push: 'false'
+          skip-version-file: 'true'
 
   test-yaml:
     runs-on: ubuntu-latest
@@ -709,46 +717,47 @@ jobs:
           EXPECTED_VERSION: '1.1.0'
           EXPECTED_VERSION_PATH: 'project.properties.revision'
 
-  # test-skip-tag:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-  #       with:
-  #         path: "./"
+  test-skip-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: "./"
 
-  #     - run: npm ci --prod
+      - run: npm ci --prod
 
-  #     - run: "git config --global user.email 'changelog@github.com'"
-  #     - run: "git config --global user.name 'Awesome Github action'"
+      - run: "git config --global user.email 'changelog@github.com'"
+      - run: "git config --global user.name 'Awesome Github action'"
 
-  #     - run: git tag | xargs git tag -d
-  #     - name: Create fake tag
-  #       run: "git tag -a 'v0.55.8' -m 'v0.55.8'"
-  #     - run: touch ./fake-file.log
-  #     - run: "git add . && git commit -m 'fix: Added fake file so version will be bumped'"
+      - run: git tag | xargs git tag -d
+      - name: Create fake tag
+        run: "git tag -a 'v0.55.8' -m 'v0.55.8'"
+      - run: touch ./fake-file.log
+      - run: "git add . && git commit -m 'feat: Added fake file so version will be bumped'"
 
-  #     - name: Generate changelog
-  #       id: changelog
-  #       uses: ./
-  #       env:
-  #         ENV: 'dont-use-git'
-  #         EXPECTED_TAG: 'v0.55.8'
-  #         SKIPPED_COMMIT: true
-  #         SKIPPED_TAG: true
-  #         EXPECTED_NO_PUSH: true
-  #       with:
-  #         github-token: ${{ secrets.github_token }}
-  #         skip-commit: 'true'
-  #         skip-tag: 'true'
-  #         git-push: 'false'
+      - name: Generate changelog
+        id: changelog
+        uses: ./
+        env:
+          ENV: 'dont-use-git'
+          EXPECTED_TAG: 'v0.55.8'
+          SKIPPED_COMMIT: true
+          SKIPPED_TAG: true
+          EXPECTED_NO_PUSH: true
+        with:
+          github-token: ${{ secrets.github_token }}
+          version-file: 'test-file.json'
+          skip-commit: 'true'
+          skip-tag: 'true'
+          git-push: 'false'
 
-  #     - name: Show file
-  #       run: |
-  #         echo "$(<test-file.json)"
+      - name: Show file
+        run: |
+          echo "$(<test-file.json)"
 
-  #     - name: Test output
-  #       run: node ./test-output.js
-  #       env:
-  #         FILES: 'test-file.json'
-  #         EXPECTED_VERSION: '1.5.0'
+      - name: Test output
+        run: node ./test-output.js
+        env:
+          FILES: 'test-file.json'
+          EXPECTED_VERSION: '1.5.0'
