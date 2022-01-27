@@ -1,3 +1,12 @@
+# [3.15.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.14.0...v3.15.0) (2022-01-27)
+
+
+### Features
+
+* add support for version in json property names containing dot ([#7](https://github.com/TriPSs/conventional-changelog-action/issues/7)) ([a43de28](https://github.com/TriPSs/conventional-changelog-action/commit/a43de280633bbe7b4501bfb5ed74779163b83f1f))
+
+
+
 # [3.14.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.13.0...v3.14.0) (2022-01-27)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add commit path to scope changelogs to single directories ([6c30b44](https://github.com/TriPSs/conventional-changelog-action/commit/6c30b44db73e2b544638f6d98470e8fe846eee5a))
-
-
-
-# [3.10.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.9.9...v3.10.0) (2021-11-30)
-
-
-### Features
-
-* Added  option ([d9201c2](https://github.com/TriPSs/conventional-changelog-action/commit/d9201c2107f9c691396768f75fe261ad3588b413))
 
 
 
