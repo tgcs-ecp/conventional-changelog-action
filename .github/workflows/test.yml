@@ -722,7 +722,7 @@ jobs:
           EXPECTED_VERSION: '1.1.0'
           EXPECTED_VERSION_PATH: 'project.properties.revision'
 
-  test-xml2:
+  test-dot-path:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -735,14 +735,14 @@ jobs:
       - run: touch ./fake-file.log
       - run: "git config --global user.email 'changelog@github.com'"
       - run: "git config --global user.name 'Awesome Github action'"
-      - run: "git add . && git commit -m 'feat: Added fake file so version will be bumped'"
+      - run: "git add . && git commit -m 'fix: Added fake file so version will be bumped'"
 
       - name: Generate changelog
         id: changelog
         uses: ./
         env:
           ENV: 'dont-use-git'
-          EXPECTED_TAG: 'v1.1.0'
+          EXPECTED_TAG: 'v1.0.4'
         with:
           github-token: ${{ secrets.github_token }}
           version-file: 'test-file.xml'
@@ -756,7 +756,7 @@ jobs:
         run: node ./test-output.js
         env:
           FILES: 'test-file.xml'
-          EXPECTED_VERSION: '1.1.0'
+          EXPECTED_VERSION: '1.0.4'
           EXPECTED_VERSION_PATH: 'project.properties."another.thing"'
 
   test-skip-tag:

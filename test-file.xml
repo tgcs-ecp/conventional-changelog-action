@@ -4,7 +4,7 @@
 
   <properties>
     <revision>1.0.6</revision>
-    <another.thing>1.0.6</another.thing>
+    <another.thing>1.0.3</another.thing>
   </properties>
 
   <modules>
