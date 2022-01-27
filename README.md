@@ -26,6 +26,7 @@ This action will bump version, tag commit and generate a changelog with conventi
 - **Optional** `pre-changelog-generation`: Path to the pre-changelog-generation script file. No hook by default.
 - **Optional** `commit-path`: Generate a changelog scoped to a specific directory.
 - **Optional** `skip-tag`: Skip creating a tag for this changelog. Default `false`.
+- **Optional** `version-from-git`: Try getting the version from `git` tags instead of using the version file. Default `false`.
 
 ### Pre-Commit hook
 
