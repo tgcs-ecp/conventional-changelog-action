@@ -1,3 +1,12 @@
+# [3.14.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.13.0...v3.14.0) (2022-01-27)
+
+
+### Features
+
+* add version-from-git, refactor skip-version-file ([#5](https://github.com/TriPSs/conventional-changelog-action/issues/5)) ([ecf205c](https://github.com/TriPSs/conventional-changelog-action/commit/ecf205c4ff89d135c5bcfa696f99e57620938954))
+
+
+
 # [3.13.0](https://github.com/TriPSs/conventional-changelog-action/compare/v3.12.0...v3.13.0) (2022-01-26)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Added  option ([d9201c2](https://github.com/TriPSs/conventional-changelog-action/commit/d9201c2107f9c691396768f75fe261ad3588b413))
-
-
-
-## [3.9.9](https://github.com/TriPSs/conventional-changelog-action/compare/v3.9.8...v3.9.9) (2021-10-05)
-
-
-### Bug Fixes
-
-* Try again with different node_modules ([9378b30](https://github.com/TriPSs/conventional-changelog-action/commit/9378b3051abbd2f793956f852cdc7bac0fea7d9c))
 
 
 
