@@ -7,6 +7,8 @@ module.exports = class BaseVersioning {
 
   versionPath = null
 
+  skipVersionFile = null
+
   newVersion = null
 
   /**
@@ -15,9 +17,10 @@ module.exports = class BaseVersioning {
    * @param {!string} fileLocation - Full location of the file
    * @param {!string} versionPath - Path inside the file where the version is located
    */
-  init = (fileLocation, versionPath) => {
+  init = (fileLocation, versionPath, skipVersionFile) => {
     this.fileLocation = fileLocation
     this.versionPath = versionPath
+    this.skipVersionFile = skipVersionFile
   }
 
   /**

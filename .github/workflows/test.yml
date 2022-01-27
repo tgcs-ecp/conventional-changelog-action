@@ -138,7 +138,8 @@ jobs:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
           skip-version-file: 'true'
-          
+          version-from-git: 'true'
+
   test-git-no-pull:
     runs-on: ubuntu-latest
     steps:
@@ -171,6 +172,7 @@ jobs:
           skip-commit: 'true'
           skip-git-pull: 'true'
           skip-version-file: 'true'
+          version-from-git: 'true'
 
   test-git-fallback:
     runs-on: ubuntu-latest
@@ -201,6 +203,7 @@ jobs:
           github-token: ${{ secrets.github_token }}
           skip-commit: 'true'
           skip-version-file: 'true'
+          version-from-git: 'true'
 
   test-git-no-push:
     runs-on: ubuntu-latest
@@ -234,6 +237,7 @@ jobs:
           skip-commit: 'true'
           git-push: 'false'
           skip-version-file: 'true'
+          version-from-git: 'true'
 
   test-yaml:
     runs-on: ubuntu-latest
@@ -630,6 +634,7 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           skip-version-file: 'true'
+          version-from-git: 'true'
           config-file-path: './test-changelog.config.js'
 
       - name: Test output

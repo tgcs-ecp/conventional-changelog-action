@@ -38,6 +38,10 @@ module.exports = class Json extends BaseVersioning {
       oldVersion,
     )
 
+    if(this.skipVersionFile) {
+      return
+    }
+
     core.info(`Bumped file "${this.fileLocation}" from "${oldVersion}" to "${this.newVersion}"`)
 
     // Update the content with the new version

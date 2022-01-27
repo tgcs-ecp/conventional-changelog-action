@@ -25,6 +25,10 @@ module.exports = class Toml extends BaseVersioning {
       oldVersion,
     )
 
+    if(this.skipVersionFile) {
+      return
+    }
+
     // Update the file
     if (oldVersion) {
       // Get the name of where the version is in
