@@ -33,9 +33,11 @@ module.exports = class Xml extends BaseVersioning {
       jsonContent = {}
     });
 
-    core.info(`json-Content: ${jsonContent}`)
+    core.info(`json-Content: ${JSON.stringify(jsonContent)}`)
+    core.info(`path: ${this.versionPath}`)
     // Get the old version
-    const oldVersion = objectPath.get(jsonContent, this.versionPath, null)
+    // const oldVersion = objectPath.get(jsonContent, this.versionPath, null)
+    const oldVersion = objectPath.get(jsonContent, ["project", "properties", "\"another.thing\""], null)
 
     // Get the new version
     this.newVersion = await bumpVersion(
