@@ -33,6 +33,8 @@ module.exports = class Xml extends BaseVersioning {
       jsonContent = {}
     });
 
+    core.info(`json-Content: ${JSON.stringify(jsonContent)}`)
+
     // Get the old version
     const oldVersion = objectPath.get(jsonContent, this.versionPath, null)
 

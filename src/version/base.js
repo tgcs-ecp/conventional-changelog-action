@@ -21,6 +21,11 @@ module.exports = class BaseVersioning {
     this.fileLocation = fileLocation
     this.versionPath = versionPath
     this.skipVersionFile = skipVersionFile
+
+    if (versionPath.includes('"')) { // if version path has dot separated properties, split path to array
+      let arr = versionPath.match(/(".*?"|[^"\.\s]+)(?=\s*\.|\s*$)/g);
+      this.versionPath = arr.map(e => e.replace(/^"|"$/g, ''))
+    }
   }
 
   /**

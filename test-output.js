@@ -7,13 +7,18 @@ const parseString = require('xml2js').parseString
 
 const actionConfig = yaml.parse(fs.readFileSync('./action.yml', 'utf8'))
 
-const {
+let {
   FILES = actionConfig.inputs['version-file'].default,
   EXPECTED_VERSION_PATH = actionConfig.inputs['version-path'].default,
   EXPECTED_VERSION = actionConfig.inputs['fallback-version'].default,
 } = process.env
 
 assert.ok(FILES, 'Files not defined!')
+
+if (EXPECTED_VERSION_PATH.includes('"')) { // if version path has dot separated properties, split path to array
+  let arr = EXPECTED_VERSION_PATH.match(/(".*?"|[^"\.\s]+)(?=\s*\.|\s*$)/g);
+  EXPECTED_VERSION_PATH = arr.map(e => e.replace(/^"|"$/g, ''))
+}
 
 /**
  * Test if all the files are updated
